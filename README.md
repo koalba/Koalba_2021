@@ -46,7 +46,7 @@ I tried diferent color palletes, but in the end I settled for a bright and color
 
 For my Career Path, I had the idea to make a "Videogame map" where you could see all the levels I've completed (Study, work...) and the level I'm currently on.
 
-<img src="https://tinyurl.com/yykgp5j4" width="500" alt="Career Path Map">
+<img src="assets/path_map.jpg" width="500" alt="Career Path Map">
 
 ## My process
 
