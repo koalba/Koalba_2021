@@ -1,0 +1,113 @@
+@mixin d-flex($direction, $wrap, $justify, $align) {
+  display: flex;
+  flex-flow: $direction $wrap;
+  justify-content: $justify;
+  @if $wrap == "nowrap" {
+    align-items: $align;
+  } @else {
+    align-content: $align;
+    align-items: $align;
+  }
+}
+
+@mixin position($type, $y, $ynum, $x, $xnum) {
+  position: $type;
+  @if $y == "top" {
+    top: $ynum;
+  } @else {
+    bottom: $ynum;
+  }
+  @if $x == "left" {
+    left: $xnum;
+  } @else {
+    right: $xnum;
+  }
+}
+
+@mixin media($d) {
+  $mobile: 770px;
+  $tablet: 1100px;
+
+  @if ($d == "m") {
+    @media screen and (max-width: #{$mobile}) {
+      @content;
+    }
+  } @else if($d == "t") {
+    @media screen and (max-width: #{$tablet}) {
+      @content;
+    }
+  } @else {
+    @media screen and (max-width: #{$d + "px"}) {
+      @content;
+    }
+  }
+}
+
+@mixin cartoon($c: w, $b: b) {
+  $hue: 180;
+  $sat: 30%;
+  $main: 100%;
+  $light: 100%;
+  $shadow: 85%;
+  $op: 1;
+
+  @if $c == "g" {
+    $hue: var(--c-accent-h);
+    $sat: var(--c-accent-s);
+    $main: var(--c-accent-l);
+  } @else if $c == "b" {
+    $hue: var(--c-blue-h);
+    $sat: var(--c-blue-s);
+    $main: var(--c-blue-l);
+  } @else if $c == "rd" {
+    $hue: var(--c-red-h);
+    $sat: var(--c-red-s);
+    $main: var(--c-red-l);
+  } @else if $c == "yll" {
+    $hue: var(--c-yellow-h);
+    $sat: var(--c-yellow-s);
+    $main: var(--c-yellow-l);
+  }
+
+  @if $c != "w" {
+    $shadow: calc(#{$main} - 15%);
+    $light: calc(#{$main} + 15%);
+  }
+
+  color: #3d3d5c;
+  background-color: hsl($hue, $sat, $main);
+
+  margin: 1rem;
+  border-radius: 0.5rem;
+
+  box-shadow: inset 0px 3px 0px 0px hsla($hue, $sat, $light, $op),
+    inset 0px -3px 0px 0px hsla($hue, $sat, $shadow, $op),
+    0px 0px 0px 3px currentColor, 0px 3px 0px 3px currentColor,
+    3px 6px 0px 3px var(--c-shadow);
+
+  transform: translateY(0);
+  transition: all 0.3s ease-in-out;
+
+  @if $b == "b" {
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: inset 0px 3px 0px 0px hsla($hue, $sat, $light, $op),
+        inset 0px -3px 0px 0px hsla($hue, $sat, $shadow, $op),
+        0px 0px 0px 3px currentColor, 0px 6px 0px 3px currentColor,
+        6px 12px 0px 3px var(--c-shadow);
+
+      transform: translateY(-4px);
+    }
+
+    &:active {
+      box-shadow: inset 0px 3px 0px 0px hsla($hue, $sat, $light, $op),
+        inset 0px -3px 0px 0px hsla($hue, $sat, $shadow, $op),
+        0px 0px 0px 3px currentColor, 0px 3px 0px 3px currentColor,
+        3px 6px 0px 3px var(--c-shadow);
+
+      transform: translateY(0);
+      transition: all 0.1s ease-in-out;
+    }
+  }
+}

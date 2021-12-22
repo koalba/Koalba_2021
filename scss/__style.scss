@@ -1,0 +1,803 @@
+@import "_variables", "_font", "_reset", "_mixin", "_animation";
+
+.button {
+  font-family: var(--ff-title);
+  font-size: var(--fs-500);
+  text-align: center;
+
+  min-width: 13rem;
+  padding: 0.5em 2em;
+
+  background-color: white;
+
+  cursor: pointer;
+  @include cartoon();
+}
+
+.icon {
+  @include cartoon();
+  width: 2.75rem;
+  height: 2.75rem;
+  cursor: pointer;
+  @include d-flex(row, nowrap, center, center);
+
+  &__svg {
+    width: 70%;
+    color: currentColor;
+  }
+}
+
+.button,
+.icon {
+  &--g {
+    @include cartoon(g);
+  }
+  &--b {
+    @include cartoon(b);
+  }
+  &--r {
+    @include cartoon(rd);
+  }
+  &--y {
+    @include cartoon(yll);
+  }
+}
+
+.title {
+  display: inline-block;
+  position: relative;
+  font-family: var(--ff-title);
+  font-size: 2.25rem;
+  min-width: 20rem;
+  text-align: center;
+  padding: 0.4em 1.5em;
+  color: #6b4d4c;
+  margin-bottom: var(--spacer-xl);
+  z-index: 1;
+
+  transform: translateY(-2rem);
+  transform-origin: center top;
+
+  background: #dba87e;
+  box-shadow: 0px 0px 0px 3px var(--c-main-text), 0px 6px 0px 0px #9b726f,
+    0px 6px 0px 3px var(--c-main-text);
+
+  &::before,
+  &::after {
+    content: "";
+    background: url(../assets/Chain.png) top / contain;
+    width: 1rem;
+    height: calc(var(--spacer-xxl));
+    position: absolute;
+    left: 1.5rem;
+    top: calc((var(--spacer-xxl) * -1) - 3px);
+  }
+
+  &::after {
+    left: auto;
+    right: 1.5rem;
+  }
+
+  &.active {
+    animation: title-bounce 0.9s cubic-bezier(0.25, 0.5, 0, 2) 1 both;
+  }
+
+  @include media(m) {
+    font-size: 1.9rem;
+    min-width: 100%;
+  }
+}
+
+@keyframes title-bounce {
+  50% {
+    transform: translateY(-0.075rem);
+  }
+  40%,
+  40%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--spacer-xl) var(--spacer-xl) 5rem;
+
+  @include media(m) {
+    padding: var(--spacer-xl) var(--spacer-m);
+  }
+}
+
+/* ------------------------ PARALLAX / HERO ------------------------ */
+
+.parallax {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--c-blue);
+  border-bottom: 3px solid var(--c-main-text);
+  z-index: 2;
+
+  &__item {
+    position: absolute;
+    bottom: 0%;
+    left: calc(50%-6210px);
+    object-fit: cover;
+    max-width: initial;
+    height: 100%;
+  }
+
+  &__logo {
+    margin: 0 auto;
+    padding: 0 2rem;
+    max-width: 700px;
+  }
+
+  .intro {
+    left: 0;
+    width: 100%;
+    height: 100%;
+    @include d-flex(column, nowrap, flex-end, center);
+  }
+
+  img {
+    pointer-events: none;
+  }
+
+  &__buttons {
+    margin: 1.5rem auto 47vh;
+    @include d-flex(row, nowrap, center, center);
+
+    @include media(t) {
+      flex-direction: column;
+    }
+  }
+}
+
+/* ------------------------ LAST PROJECTS ------------------------ */
+
+.last {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+
+  .container {
+    &::before {
+      content: "";
+      background: currentColor;
+      position: absolute;
+      top: 40%;
+      left: var(--spacer-xl);
+      width: calc(100% - var(--spacer-xl) * 2);
+      height: 25%;
+      box-shadow: 0px 0px 0px 3px currentColor,
+        inset 0px 0px 0px 12px var(--c-yellow);
+
+      @include media(t) {
+        display: none;
+      }
+    }
+  }
+
+  img {
+    border-radius: 0.1em;
+    box-shadow: 0px 0px 0px 3px currentColor;
+  }
+
+  &__ul {
+    @include d-flex(row, nowrap, space-between, auto);
+    position: relative;
+    padding: 0 var(--spacer-xl);
+
+    @include media(t) {
+      flex-direction: column;
+      padding: 0;
+    }
+  }
+
+  &__li {
+    width: 48.5%;
+    position: relative;
+    overflow: hidden;
+    padding: 1.5rem;
+    border-radius: 0.25em;
+    background: url(../assets/x.png) center / 100% 100% no-repeat, #9b726f;
+    box-shadow: inset 0px 0px 0px 3px currentColor, 0px 6px 0px -3px #6b4d4c,
+      0px 6px 0px 0px currentColor, 6px 12px 0px 0px var(--c-shadow);
+
+    @include media(t) {
+      width: 100%;
+      max-width: 650px;
+      margin: 0 auto;
+
+      & + & {
+        margin-top: var(--spacer-l);
+      }
+    }
+
+    @include media(m) {
+      padding: 1.2rem;
+
+      & + & {
+        margin-top: var(--spacer-m);
+      }
+    }
+  }
+
+  &__a {
+    position: relative;
+    overflow: hidden;
+    padding: 1.3rem;
+    border-radius: 0.25em;
+    box-shadow: 0px 0px 0px 3px currentColor,
+      inset 0px 0px 0px 3px var(--c-yellow), inset 0px 0px 0px 6px currentColor,
+      inset 0px 0px 0px 1.3rem #e6decb;
+
+    @include media(m) {
+      padding: 6px;
+    }
+  }
+
+  &__over {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #e6decbf1;
+    box-shadow: inset 0px -6px 0px 0px #dba87e,
+      inset 0px -9px 0px 0px currentColor, 0px 0px 0px 3px currentColor;
+    @include d-flex(row, nowrap, center, center);
+    font-family: var(--ff-title);
+    font-size: 2.1rem;
+
+    transform: translateY(calc(-100% - 3px));
+    transition: all 0.5s ease-in-out;
+  }
+
+  &__a:hover &__over {
+    transform: translateY(0);
+  }
+
+  .button {
+    margin: var(--spacer-xl) auto 0;
+    font-size: 1.35rem;
+  }
+}
+
+/* ------------------------ MAP ------------------------ */
+
+.path {
+  &__container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 1700px;
+    max-height: 100vh;
+    margin: 0 auto;
+  }
+
+  &__ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__li {
+    position: absolute;
+    display: inline-block;
+    width: 20%;
+    max-width: 2.75rem;
+    height: 20%;
+    max-height: 2.75rem;
+
+    cursor: pointer;
+
+    border-radius: 0.5em;
+    box-shadow: 0px 0px 0px 6px var(--c-yellow), 0px 0px 0px 9px currentColor,
+      0px 3px 0px 9px currentColor, 6px 9px 0px 6px var(--c-shadow);
+
+    &--1 {
+      top: 57.5%;
+      left: 14%;
+    }
+
+    &--2 {
+      top: 41%;
+      left: 35.9%;
+    }
+
+    &--3 {
+      top: 51.5%;
+      right: 41%;
+    }
+
+    &--4 {
+      top: 44%;
+      right: 19.75%;
+    }
+  }
+
+  &__icon {
+    background: white;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5em;
+    transform: translateY(0);
+    transition: all 0.3s ease-in-out;
+
+    box-shadow: inset 0px 0px 0px 0px hsl(180, 30%, 85%),
+      0px 0px 0px 3px currentColor, 0px 0px 0px 2.5px currentColor,
+      0px 0px 0px 3px var(--c-shadow);
+
+    @include d-flex(row, nowrap, center, center);
+  }
+
+  &__li:hover &__icon {
+    transform: translateY(-8px);
+    box-shadow: inset 0px -4px 0px 0px hsl(180, 30%, 85%),
+      0px 0px 0px 3px currentColor, 0px 6px 0px 2.5px currentColor,
+      3px 6px 0px 6px var(--c-shadow);
+  }
+
+  &__li:active &__icon {
+    box-shadow: inset 0px 0px 0px 0px hsl(180, 30%, 85%),
+      0px 0px 0px 3px currentColor, 0px 0px 0px 2.5px currentColor,
+      0px 0px 0px 3px var(--c-shadow);
+
+    transform: translateY(0);
+    transition: all 0.075s ease-in-out;
+  }
+
+  &__svg {
+    width: 65%;
+    margin: 0 auto;
+    stroke: var(--c-main-text);
+    stroke-width: 1.75px;
+    stroke-linecap: round;
+    color: var(--c-yellow);
+
+    &.active {
+      color: var(--c-blue);
+    }
+  }
+
+  &__text {
+    position: absolute;
+    top: -13rem;
+    left: -4.5rem;
+    padding: 3rem 2rem 1rem;
+    text-align: center;
+    border-radius: 0.5rem;
+    z-index: 1;
+    @include cartoon();
+
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(0.5rem);
+    transition: all 0.5s ease-in-out 0.1s;
+
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: -2.1rem;
+      left: 4.3rem;
+      width: 0.7rem;
+      height: 0.7rem;
+      background-color: white;
+      border: 4px solid var(--c-main-text);
+      border-radius: 50%;
+    }
+
+    &::after {
+      content: "WIP";
+      @include d-flex(row, nowrap, center, center);
+      font-family: var(--ff-title);
+      font-size: 1.5rem;
+      padding: 0.5rem 1rem;
+      min-width: 50%;
+      background: var(--c-blue);
+      border-radius: 0.15em 0.15em 0.5em 0.5em;
+      box-shadow: 0px 0px 0px 3px currentColor, 0px 3px 0px 3px currentColor,
+        3px 6px 0px 3px var(--c-shadow);
+      position: absolute;
+      top: -0.75rem;
+      left: calc(25% - 1rem);
+    }
+
+    &.completed::after {
+      content: "Victory!";
+      background: var(--c-yellow);
+    }
+  }
+
+  &__li:hover &__text {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  &__title,
+  &__p {
+    white-space: nowrap;
+  }
+
+  &__title {
+    font-family: var(--ff-title);
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  &__p {
+    font-weight: bolder;
+  }
+}
+
+/* ------------------------ ABOUT ------------------------ */
+
+.about {
+  width: 90%;
+  max-width: 1000px;
+  display: grid;
+  grid-template-columns: 0.8fr 2fr;
+  grid-template-rows: 1fr;
+  align-items: stretch;
+  margin: -10rem auto 0;
+  z-index: 2;
+
+  &__img {
+    border-radius: 0.5em 0.5em 0 0.5em;
+    box-shadow: 0px 0px 0px 3px currentColor, 0px 3px 0px 3px currentColor;
+    z-index: 3;
+    object-fit: cover;
+    background-color: var(--c-main-text);
+
+    @include media(m) {
+      border-radius: 0.5rem 0.5rem 0 0;
+    }
+  }
+
+  &__text {
+    @include d-flex(column, nowrap, auto, auto);
+    position: relative;
+    height: 100%;
+    z-index: 2;
+
+    @include media(m) {
+      justify-content: center;
+      z-index: 3;
+    }
+  }
+
+  &__name {
+    @include d-flex(row, nowrap, space-between, flex-end);
+
+    @include media(m) {
+      width: 100%;
+      margin: 0;
+      padding: 0 var(--spacer-xs);
+      text-align: center;
+      position: absolute;
+      bottom: calc(100% + 1.5rem);
+      right: 0;
+    }
+  }
+
+  &__title {
+    font-family: var(--ff-title);
+    font-size: 2rem;
+    display: inline-block;
+    padding: 0.75rem var(--spacer-m);
+    @include cartoon(w, n);
+    border-radius: 0 0.5em 0.5em 0;
+    margin: 1.5rem 0 1rem 0;
+
+    @include media(m) {
+      margin: 0;
+      border-radius: 0.5rem;
+      font-size: 1.3rem;
+      padding: var(--spacer-xxs) var(--spacer-xs);
+    }
+  }
+
+  &__ul {
+    @include d-flex(row, nowrap, flex-end, center);
+  }
+
+  &__li {
+    margin: 1rem 0.5rem;
+
+    @include media(m) {
+      width: 2.1rem;
+      height: 2.1rem;
+      margin: 0 0.35rem;
+    }
+  }
+
+  &__p {
+    padding: var(--spacer-s) var(--spacer-m) var(--spacer-m) 7rem;
+    @include cartoon(w, n);
+    height: 100%;
+    margin: 0.5rem 0 0 -5rem;
+    font-size: 1.1rem;
+
+    strong {
+      font-weight: bold;
+    }
+
+    @include media(m) {
+      border-radius: 0 0 0.5rem 0.5rem;
+      margin: 0;
+      padding: var(--spacer-s) var(--spacer-m) var(--spacer-l);
+    }
+  }
+
+  @include media(1000) {
+    max-width: 750px;
+    grid-template-columns: 1.2fr 2fr;
+    margin: var(--spacer-l) auto 0;
+  }
+
+  @include media(m) {
+    max-width: 400px;
+    width: 100%;
+    padding: 0 var(--spacer-m);
+    margin: var(--spacer-xl) auto 0;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ------------------------ BLOG ------------------------ */
+
+.blog {
+  text-align: center;
+  z-index: 0;
+
+  &__ul {
+    @include d-flex(row, nowrap, space-between, auto);
+    position: relative;
+    padding: var(--spacer-xl) var(--spacer-xl) 5rem;
+    margin: var(--spacer-xxs) 0 var(--spacer-xs);
+    z-index: auto;
+
+    background: url(../assets/pattern-wood.png), #9b726f;
+    box-shadow: 0px 0px 0px 3px var(--c-main-text), 0px 6px 0px 0px #9b726f,
+      0px 6px 0px 3px var(--c-main-text), inset 0px 0px 0px 20px #dba87e,
+      inset 0px 4px 0px 23px var(--c-main-text),
+      inset 0px 0px 0px 23px var(--c-main-text);
+
+    &::before,
+    &::after {
+      left: calc(50% - 8.5rem);
+    }
+
+    &::after {
+      left: auto;
+      right: calc(50% - 8.5rem);
+    }
+
+    @include media(m) {
+      flex-direction: column;
+      padding: var(--spacer-l) var(--spacer-l) 5rem;
+    }
+
+    @include media(400) {
+      padding: 2rem;
+      box-shadow: 0px 0px 0px 3px var(--c-main-text), 0px 6px 0px 0px #9b726f,
+        0px 6px 0px 3px var(--c-main-text), inset 0px 0px 0px 10px #dba87e,
+        inset 0px 4px 0px 13px var(--c-main-text),
+        inset 0px 0px 0px 13px var(--c-main-text);
+    }
+  }
+
+  &__ul.active &__li {
+    opacity: 1;
+    animation: stamp 0.6s cubic-bezier(0.25, 0.5, 0, 2) 1 ;
+  }
+
+  &__li {
+    position: relative;
+    color: var(--c-main-text);
+    background: white;
+    width: 31%;
+    padding: 1rem 1rem 1.5rem;
+    border-radius: 0.25rem;
+    border: 3px solid var(--c-main-text);
+    box-shadow: 3px 6px 0px 2px #3f2d2c25;
+    transform-origin: center;
+    opacity: 0;
+    transform: rotate(-1deg) scale(1) translateY(0);
+    transition: all .5s ease;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0.3rem;
+      left: 0.3rem;
+      width: 1rem;
+      height: 1rem;
+      border-radius: 50%;
+      box-shadow: 0px 0px 0px 3px var(--c-main-text),
+        0px 2px 0px 3px var(--c-main-text);
+      background: var(--c-yellow);
+    }
+
+    &::after {
+      left: auto;
+      right: 0.3rem;
+    }
+
+    &:hover {
+      opacity: .2;
+      transform: rotate(0) scale(1.07) translateY(0);
+    }
+
+    @include media(t) {
+      width: 47%;
+
+      &.mobile {
+        display: none;
+      }
+    }
+
+    @include media(m) {
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+      transform: rotate(-1deg) scale(1) translateY(0);
+
+      & + & {
+        margin-top: var(--spacer-m);
+      }
+
+      &:first-child,
+      &:last-child {
+        transform: rotate(1deg) scale(1) translateY(0);
+      }
+
+      &:hover {
+        &:first-child,
+        &:last-child {
+          transform: rotate(0) scale(1.07) translateY(0);
+        }
+      }
+
+      &.mobile {
+        display: block;
+      }
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+  &__img {
+    min-height: 10rem;
+    border-radius: 0.1rem;
+    box-shadow: 0px 0px 0px 3px currentColor;
+    object-fit: cover;
+  }
+
+  &__title {
+    font-size: 2.1rem;
+    margin: 1rem 0.25rem 0.5rem;
+  }
+
+  &__p {
+    font-family: var(--ff-main);
+  }
+}
+
+/* ------------------------ CONTACT ------------------------ */
+
+.contact {
+  position: relative;
+  overflow: hidden;
+  background: url(../assets/contact.png) bottom right / cover no-repeat,
+    var(--c-blue);
+  border-top: 3px solid currentColor;
+
+  .container {
+    max-width: 1100px;
+    min-height: 100vh;
+    padding-right: 30rem;
+    @include d-flex(column, nowrap, flex-start, flex-start);
+
+    @include media(m) {
+      padding-right: var(--spacer-m);
+      padding-bottom: var(--spacer-xxl);
+      min-height: auto;
+    }
+  }
+
+  .title {
+    margin-inline: auto;
+  }
+
+  // &::before {
+  //   content: "";
+  //   position: absolute;
+  //   top: -9vw;
+  //   left: 0;
+  //   width: 100%;
+  //   height: 9vw;
+  //   background: url(../assets/contact.png) bottom / cover no-repeat;
+  // }
+
+  &__form {
+    width: 100%;
+    @include d-flex(row, wrap, space-between, flex-start);
+  }
+
+  &__label {
+    width: 48.5%;
+    &[for="message"] {
+      width: 100%;
+    }
+
+    @include media(m) {
+      width: 100%;
+    }
+  }
+
+  &__input {
+    width: 100%;
+    background: white;
+    padding: 0.6rem 1rem;
+    @include cartoon(w, n);
+    margin: 0 0 1.5rem;
+
+    &[name="message"] {
+      min-height: 7rem;
+    }
+
+    &::placeholder {
+      color: currentColor;
+      opacity: 0.5;
+    }
+  }
+
+  &__button {
+    @include cartoon(yll);
+    margin: 1rem auto 0;
+  }
+
+  // @include media(m) {
+  //   background: url(../assets/contact.png) 88% 100% / cover no-repeat,
+  //     var(--c-blue);
+  // }
+
+  &__ul {
+    margin: var(--spacer-l) auto 0;
+    @include d-flex(row, nowrap, space-between, center);
+  }
+}

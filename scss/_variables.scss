@@ -1,0 +1,58 @@
+:root {
+  /* ---------- COLOR ---------- */
+
+  --white: white;
+  --black: black;
+
+  --c-main-text: #3d3d5c;
+  --c-main-light: white;
+
+  --c-shadow: #16202421;
+
+  --c-accent-h: 72;
+  --c-accent-s: 59%;
+  --c-accent-l: 53%;
+  --c-accent: #b2ce40;
+
+  --c-blue-h: 184;
+  --c-blue-s: 59%;
+  --c-blue-l: 71%;
+  --c-blue: #89dbe1;
+
+  --c-red-h: 3;
+  --c-red-s: 89%;
+  --c-red-l: 63%;
+  --c-red: #f5554c;
+
+  --c-yellow-h: 39;
+  --c-yellow-s: 100%;
+  --c-yellow-l: 61%;
+  --c-yellow: #ffb837;
+
+  /* ---------- FONT ---------- */
+
+  --ff-main: Helvetica, Arial, sans-serif;
+  --ff-title: "jungle_adventurer", Copperplate, fantasy;
+
+  --fs-400: 1rem;
+  --fs-500: 1.25rem;
+
+  /* ---------- SPACE ---------- */
+
+  --spacer-xxs: 0.5rem;
+  --spacer-xs: 1rem;
+  --spacer-s: 1.5rem;
+  --spacer-m: 2rem;
+  --spacer-l: 3rem;
+  --spacer-xl: 4rem;
+  --spacer-xxl: 6rem;
+}
+
+// @media (prefers-color-scheme: dark) {
+//   :root {
+//     --white: black;
+//     --black: white;
+//     --c-main-text: white;
+//     --c-main-light: #3d3d5c;
+//   }
+// }

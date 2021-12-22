@@ -1,0 +1,252 @@
+.porfolio {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+  background: currentColor;
+
+  @include media(m) {
+    .container {
+      padding: var(--spacer-xl) 0;
+    }
+
+    .title {
+      min-width: calc(100% - var(--spacer-l));
+    }
+  }
+
+  &::before {
+    content: "";
+    width: 45%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 27.5%;
+    background: white;
+    box-shadow: 0px -3px 0px 3px currentColor,
+      0px -30px 0px 30px var(--c-yellow), 0px -33px 0px 33px currentColor;
+  }
+
+  &__label {
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    width: 4rem;
+    height: 2rem;
+    margin-bottom: var(--spacer-l);
+    border-radius: 20rem;
+    box-shadow: 0px 0px 0px 6px var(--c-yellow), 0px 0px 0px 9px currentColor,
+      0px 3px 0px 9px currentColor, 6px 9px 0px 6px var(--c-shadow);
+    cursor: pointer;
+
+    &::before,
+    &::after {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      @include d-flex(row, nowrap, center, center);
+      font-family: var(--ff-title);
+      font-size: 1.6rem;
+      white-space: nowrap;
+      pointer-events: none;
+
+      @include media(m) {
+        font-size: 1.2rem;
+      }
+    }
+
+    &::before {
+      content: "Web";
+      position: absolute;
+      right: 140%;
+    }
+
+    &::after {
+      content: "Other";
+      position: absolute;
+      left: 140%;
+    }
+
+    @include media(m) {
+      width: 2.75rem;
+      height: 1.4rem;
+    }
+  }
+
+  &__input {
+    display: none;
+  }
+
+  &__switch {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: white;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    box-shadow: 0px 0px 0px 3px currentColor;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      border-radius: 50%;
+      width: calc(50% - 6px);
+      height: calc(100% - 6px);
+      background-color: var(--c-yellow);
+      box-shadow: inset 0px 0px 0px 3px currentColor;
+
+      transition: all 1s ease;
+    }
+  }
+
+  &__input:checked + &__switch::before {
+    transform: translateX(calc(100% + 6px));
+  }
+
+  &__slide {
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+  }
+
+  &__slide.active {
+    opacity: 1;
+  }
+
+  &__slider {
+    width: 200%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    transition: all 1s ease;
+  }
+
+  &__ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-flow: dense;
+    gap: var(--spacer-m);
+    position: relative;
+    padding: 0 var(--spacer-xl);
+
+    @include media(t) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacer-s);
+    }
+
+    @include media(m) {
+      grid-template-columns: 1fr;
+      gap: var(--spacer-xs);
+      padding: 0 var(--spacer-s);
+    }
+  }
+
+  &__li {
+    position: relative;
+    overflow: hidden;
+    padding: 1.2rem;
+    border-radius: 0.25em;
+    background: url(../assets/x.png) center / 100% 100% no-repeat, #9b726f;
+    box-shadow: inset 0px 0px 0px 3px currentColor, 0px 6px 0px -3px #6b4d4c,
+      0px 6px 0px 0px currentColor, 6px 12px 0px 0px var(--c-shadow);
+
+    &.big {
+      grid-column: span 2;
+      grid-row: span 2;
+      padding: 1.7rem;
+
+      .porfolio__over {
+        font-size: 2.2rem;
+      }
+
+      .porfolio__a {
+        padding: 1.3rem;
+        @include media(t) {
+          padding: 1.1rem;
+        }
+        @include media(m) {
+          padding: 6px;
+        }
+      }
+
+      @include media(t) {
+        padding: 1.2rem;
+      }
+
+      @include media(m) {
+        grid-column: auto;
+        grid-row: auto;
+      }
+    }
+  }
+
+  @media screen and (min-width: 770px) {
+    @for $i from 0 to 10 {
+      &__slide.active &__li:nth-child(#{$i}) {
+        @if $i < 10 {
+          animation: 1s ease #{"0." + ($i) + "s"} 1 slideup backwards;
+        } @else {
+          animation: 1s ease #{$i / 10 + "s"} 1 slideup backwards;
+        }
+      }
+    }
+  }
+
+  &__a {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    padding: 1rem;
+    border-radius: 0.25em;
+    box-shadow: 0px 0px 0px 3px currentColor,
+      inset 0px 0px 0px 3px var(--c-yellow), inset 0px 0px 0px 6px currentColor,
+      inset 0px 0px 0px 1.3rem #e6decb;
+
+    @include media(m) {
+      padding: 6px;
+    }
+  }
+
+  &__picture {
+    height: 100%;
+  }
+
+  &__img {
+    border-radius: 0.1em;
+    box-shadow: 0px 0px 0px 3px currentColor;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__over {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #e6decbf1;
+    box-shadow: inset 0px -6px 0px 0px #dba87e,
+      inset 0px -9px 0px 0px currentColor, 0px 0px 0px 3px currentColor;
+    @include d-flex(row, nowrap, center, center);
+    font-family: var(--ff-title);
+    font-size: 1.7rem;
+
+    transform: translateY(calc(-100% - 3px));
+    transition: all 0.5s ease-in-out;
+  }
+
+  &__a:hover &__over {
+    transform: translateY(0);
+  }
+
+  .button {
+    margin: var(--spacer-xl) auto 0;
+    font-size: 1.35rem;
+  }
+
+  .contact__ul {
+    justify-content: center;
+  }
+}
